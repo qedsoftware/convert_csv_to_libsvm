@@ -20,7 +20,7 @@ ifeq ($(mode),release)
 else ifeq ($(mode),development)
 	CFLAGS = -O2 -g -Wall -I$(INCLUDES)
 else 
-	CFLAGS = -O0 -g -Wall -Werror -I$(INCLUDES)
+	CFLAGS = -O2 -g -Wall -Werror -I$(INCLUDES)
 endif
 
 # name of final program

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h> // getopt()
+#include <time.h>
 
 char buf[10000000];
 float feature[100000];
@@ -40,6 +41,8 @@ main(int argc, char **argv)
 	// defaults
 	int mode = 0;
 	int reporting_interval = 10000;
+    // timing
+    double t1, t2;
 	while ((g = getopt(argc,argv,"i:o:m:r:bhv")) != -1) {
 		switch(g) {
 			case 'i': {		// name of input file
@@ -106,6 +109,7 @@ main(int argc, char **argv)
 		return 1;
 	}
 
+    t1 = clock();
 	int line_count = 0;
 	while(fscanf(ifp,"%[^\n]\n",buf)==1)
 	{
@@ -145,5 +149,9 @@ main(int argc, char **argv)
 
 	fclose(ifp);
 	fclose(ofp);
+    t2 = clock();
+
+    printf("Elapsed time: %.2lf\n", (t2 - t1)/CLOCKS_PER_SEC);
+
 	return 0;
 }
